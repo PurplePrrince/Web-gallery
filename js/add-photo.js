@@ -1,12 +1,11 @@
 // Элементы для добавления фото
 const addPhotoBtn = document.querySelector('.add-photo-btn');
 const addPhotoModalOverlay = document.querySelector('.add-photo-modal-overlay');
-const addPhotoModal = document.querySelector('.add-photo-modal');
 const addPhotoForm = document.getElementById('add-photo-form');
 const closeAddModalBtn = document.querySelector('.close-add-modal');
-const cardsContainer = document.querySelector('.cards-container');
+const cardsContainer = document.querySelector('.cards-container'); // Единственное объявление здесь
 
-// Загрузка карточек из localStorage при старте
+// Загрузка карточек из localStorage
 function loadCardsFromStorage() {
     const savedCards = JSON.parse(localStorage.getItem('swampCards')) || [];
     savedCards.forEach(cardData => createCard(cardData));
@@ -27,30 +26,14 @@ function createCard(cardData) {
         <p class="description">${description}</p>
     `;
 
-    // Привязка события клика для открытия текущего модального окна
-    newCard.addEventListener('click', () => {
-        const modalOverlay = document.querySelector('.modal-overlay');
-        const modalImage = modalOverlay.querySelector('img');
-        const modalTitle = modalOverlay.querySelector('h3');
-        const modalDescription = modalOverlay.querySelector('.full-description');
-        const modalTags = modalOverlay.querySelector('.tags');
-
-        modalImage.src = imageUrl;
-        modalTitle.textContent = title;
-        modalDescription.textContent = description;
-        modalTags.textContent = `Теги: ${tags}`;
-
-        modalOverlay.style.display = 'flex';
-    });
-
     cardsContainer.prepend(newCard);
+    bindCardEvents(newCard); // Используем функцию из modal.js
 }
 
-// Сохранение карточек в localStorage
+// Сохранение в localStorage
 function saveCardToStorage(imageUrl, title, description, tags) {
     const savedCards = JSON.parse(localStorage.getItem('swampCards')) || [];
-    const newCardData = { imageUrl, title, description, tags };
-    savedCards.push(newCardData);
+    savedCards.push({ imageUrl, title, description, tags });
     localStorage.setItem('swampCards', JSON.stringify(savedCards));
 }
 
@@ -76,7 +59,6 @@ addPhotoModalOverlay.addEventListener('click', (e) => {
 addPhotoForm.addEventListener('submit', (e) => {
     e.preventDefault();
 
-    // Получение данных из формы
     const fileInput = document.getElementById('photo-upload');
     const title = document.getElementById('photo-title').value;
     const description = document.getElementById('photo-description').value;
@@ -87,23 +69,19 @@ addPhotoForm.addEventListener('submit', (e) => {
         const reader = new FileReader();
 
         reader.onload = function (e) {
-            const imageUrl = e.target.result; // Base64 строка изображения
-
-            // Создание и добавление карточки
+            const imageUrl = e.target.result;
             const cardData = { imageUrl, title, description, tags };
-            createCard(cardData);
 
-            // Сохранение в localStorage
+            createCard(cardData);
             saveCardToStorage(imageUrl, title, description, tags);
 
-            // Закрытие модального окна и очистка формы
             addPhotoModalOverlay.style.display = 'none';
             addPhotoForm.reset();
         };
 
-        reader.readAsDataURL(file); // Преобразование файла в Base64
+        reader.readAsDataURL(file);
     }
 });
 
-// Загрузка сохранённых карточек при старте страницы
+// Загрузка при старте
 document.addEventListener('DOMContentLoaded', loadCardsFromStorage);

@@ -1,14 +1,13 @@
-// Открытие модального окна
-const cards = document.querySelectorAll('.card');
+// Элементы для просмотра карточек
 const modalOverlay = document.querySelector('.modal-overlay');
-const modal = document.querySelector('.modal');
-const modalImage = modal.querySelector('img');
-const modalTitle = modal.querySelector('h3');
-const modalDescription = modal.querySelector('.full-description');
-const modalTags = modal.querySelector('.tags');
-const closeModalButton = modal.querySelector('.close-modal');
+const modalImage = modalOverlay.querySelector('img');
+const modalTitle = modalOverlay.querySelector('h3');
+const modalDescription = modalOverlay.querySelector('.full-description');
+const modalTags = modalOverlay.querySelector('.tags');
+const closeModalButton = modalOverlay.querySelector('.close-modal');
 
-cards.forEach(card => {
+// Функция для привязки событий к карточкам
+function bindCardEvents(card) {
     card.addEventListener('click', () => {
         const imageSrc = card.querySelector('img').src;
         const title = card.querySelector('h3').textContent;
@@ -22,7 +21,10 @@ cards.forEach(card => {
 
         modalOverlay.style.display = 'flex';
     });
-});
+}
+
+// Привязка событий к существующим карточкам
+document.querySelectorAll('.card').forEach(card => bindCardEvents(card));
 
 // Закрытие модального окна
 closeModalButton.addEventListener('click', () => {
@@ -31,6 +33,12 @@ closeModalButton.addEventListener('click', () => {
 
 modalOverlay.addEventListener('click', (e) => {
     if (e.target === modalOverlay) {
+        modalOverlay.style.display = 'none';
+    }
+});
+
+document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && modalOverlay.style.display === 'flex') {
         modalOverlay.style.display = 'none';
     }
 });
