@@ -1,32 +1,240 @@
 @import url('https://fonts.googleapis.com/css2?family=Jura:wght@600&display=swap');
 
+*,
+*:before,
+*:after {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+  
 body {
     background-color: rgb(235, 250, 215);
+    color: #505050;
+    font-family: "Jura", sans-serif;
+    font-weight: 300;
+    font-size: 16px;
+    line-height: 1.8;
+}
+  
+h1, h2, h3, h4, h5, h6 {
+    line-height: 1;
+    font-weight: 100;
+    color: #77C7AC;
+}
+  
+.container {
+    width: 80%;
+    margin: 0 auto;
+    padding: 0 30px;
+}
+  
+header {
+    width: 100%;
+    height: 10em;
+    overflow: hidden;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 999;
+    background-color: #033413;
+    transition: height 0.3s;
+}
+  
+header h1#logo {
+    display: inline-block;
+    line-height:3em;
     margin: 0;
-    padding: 0;
+    padding:0 1em;
+    float: left;
+    font-size: 60px;
+    color: #fcfcfc;
+    font-weight: 400;
+    -webkit-transition: all 0.3s;
+    -moz-transition: all 0.3s;
+    -ms-transition: all 0.3s;
+    -o-transition: all 0.3s;
+    transition: all 0.3s;
 }
-
-a {
-    text-decoration: none;
-    color: #000000;
-}
-
-li {
-    list-style: none;
-}
-
-footer {
-    border-top: #000000 solid 3px;
-    padding: 20px 50px 0 50px;
-    margin-top: 30px;
+  
+header nav {
     display: flex;
-    justify-content: space-between;
+    justify-content: end;
+}
+  
+.box {
+    line-height: 150px;
+    margin-left: 20px;
+    color: #fcfcfc;
+    font-weight: 300;
+    font-size: 1em;
+    -webkit-transition: all 0.3s;
+    -moz-transition: all 0.3s;
+    -ms-transition: all 0.3s;
+    -o-transition: all 0.3s;
+    transition: all 0.3s;
+}
+  
+header.smaller {
+    height: 75px;
+}
+  
+header.smaller h1#logo {
+    line-height: 75px;
+    font-size: 30px;
+}
+  
+header.smaller .box {
+    height: 55px;
+    line-height: 45px;
+    margin-top: 15px;
+}
+  
+.clearfix:after {
+    visibility: hidden;
+    display: block;
+    content: "";
+    clear: both;
+    height: 0;
 }
 
-footer ul {
-    margin-top: 0;
+.box{
+    margin-top: 20px;
+    position: relative;
+    font-family: 'Open Sans', sans-serif
 }
 
-.footer-menu li {
-    padding-top: 15px;
+.input {
+    padding: 10px;
+    width: 80px;
+    height: 80px;
+    background: none;
+    border: 4px solid #ffffff;
+    border-radius: 50px;
+    box-sizing: border-box;
+    font-size: 26px;
+    color: #ffffff;
+    outline: none;
+    transition: .2s;
 }
+
+header.smaller .input {
+    padding: 10px;
+    width: 50px;
+    height: 50px;
+    transition: .2s;
+}
+
+.box:hover input{
+    width: 350px;
+    background: #033413;
+    border-radius: 10px;
+}
+
+.box i {
+    position: absolute;
+    top: 50px;
+    right: 20px;
+    font-size: 40px;
+    color: #ffffff;
+    transition: all 0.2s ease; /* Анимируем все свойства */
+}
+
+header.smaller .box i {
+    top: 13px;
+    right: 13px;
+    font-size: 24px;
+    transition: all 0.2s ease; /* Анимируем все свойства */
+}
+
+.box:hover i{
+    opacity: 0;
+    z-index: -1;
+}
+  
+main {
+    margin-top: 160px;
+}
+
+@media all and (max-width: 760px) {
+    header h1#logo {
+      display: block;
+      float: none;
+      margin: 0 auto;
+      height: 100px;
+      line-height: 80px;
+      text-align: center;
+    }
+  
+    header nav {
+      display: block;
+      float: none;
+      height: 50px;
+      text-align: center;
+      margin: 0 auto;
+    }
+  
+    .box {
+      position: relative;
+      height: 50px;
+      margin: 0 10px;
+      line-height: 50px;
+    }
+
+    header.smaller .box {
+        position: relative;
+        margin: 0;
+    }
+
+    .input {
+        width: 40px;
+        height: 40px;
+        border: 3px solid #ffffff;
+    }
+
+    header.smaller .input {
+        width: 20px;
+        height: 20px;
+        transition: .2s;
+    }
+
+    .box i {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        font-size: 20px;
+        transition: all 0.2s ease;
+    }
+
+    header.smaller .box i {
+        position: absolute;
+        top: 38%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        font-size: 10px;
+        transition: all 0.2s ease;
+    }
+  
+    header.smaller {
+      height: 80px;
+    }
+  
+    header.smaller h1#logo {
+      height: 40px;
+      line-height: 40px;
+      font-size: 30px;
+       width:100%;
+    }
+  
+    header.smaller nav {
+      height: 35px;
+    }
+}
+  
+@media all and (max-width: 600px) {
+    .container {
+      width: 100%;
+    }
+}
+  
