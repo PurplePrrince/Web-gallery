@@ -137,14 +137,14 @@ header.smaller .input {
     right: 20px;
     font-size: 40px;
     color: #ffffff;
-    transition: all 0.2s ease; /* Анимируем все свойства */
+    transition: all 0.2s ease;
 }
 
 header.smaller .box i {
     top: 13px;
     right: 13px;
     font-size: 24px;
-    transition: all 0.2s ease; /* Анимируем все свойства */
+    transition: all 0.2s ease;
 }
 
 .box:hover i{
@@ -200,7 +200,7 @@ main {
 
     .box i {
         position: absolute;
-        top: 50%;
+        top: 45%;
         left: 50%;
         transform: translate(-50%, -50%);
         font-size: 20px;
@@ -209,7 +209,7 @@ main {
 
     header.smaller .box i {
         position: absolute;
-        top: 38%;
+        top: 35%;
         left: 50%;
         transform: translate(-50%, -50%);
         font-size: 10px;
@@ -238,3 +238,117 @@ main {
     }
 }
   
+
+.cards-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    padding: 20px;
+    justify-content: center;
+}
+
+.card {
+    background: #fff;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    width: calc(25% - 20px);
+    cursor: pointer;
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+.card img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+}
+
+.card h3 {
+    margin: 15px;
+    font-size: 1.2em;
+    color: #333;
+}
+
+.card .description {
+    margin: 0 15px 15px;
+    color: #666;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+/* Модальное окно */
+.modal-overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.8);
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.modal {
+    background: #fff;
+    border-radius: 10px;
+    padding: 20px;
+    max-width: 500px;
+    width: 90%;
+    position: relative;
+}
+
+.modal img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    border-radius: 10px;
+}
+
+.modal h3 {
+    margin: 15px 0;
+    font-size: 1.5em;
+    color: #333;
+}
+
+.modal .full-description {
+    color: #666;
+    margin-bottom: 15px;
+}
+
+.modal .tags {
+    color: #888;
+    font-style: italic;
+}
+
+.modal .close-modal {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: none;
+    border: none;
+    font-size: 1.5em;
+    cursor: pointer;
+    color: #333;
+}
+
+@media (max-width: 768px) {
+    .card {
+        width: calc(50% - 20px);
+    }
+}
+
+@media (max-width: 480px) {
+    .card {
+        width: 100%;
+    }
+}
