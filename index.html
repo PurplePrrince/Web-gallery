@@ -18,6 +18,9 @@
                     </form>
                     <i class="fas fa-magnifying-glass"></i>
                 </div>
+                <button class="add-photo-btn" title="Добавить фото">
+                    <i class="fas fa-plus"></i>
+                </button>
             </nav>
         </div>
     </header>
@@ -107,6 +110,32 @@
                 <button class="close-modal">×</button>
             </div>
         </div>
+
+        <div class="add-photo-modal-overlay">
+            <div class="add-photo-modal">
+                <h3>Добавить новое фото</h3>
+                <form id="add-photo-form">
+                    <label>
+                        Выберите изображение:
+                        <input type="file" id="photo-upload" accept="image/*" required>
+                    </label>
+                    <label>
+                        Название:
+                        <input type="text" id="photo-title" maxlength="50" required>
+                    </label>
+                    <label>
+                        Описание:
+                        <textarea id="photo-description" maxlength="500" required></textarea>
+                    </label>
+                    <label>
+                        Теги (через запятую):
+                        <input type="text" id="photo-tags" maxlength="100" placeholder="Тег1, Тег2">
+                    </label>
+                    <button type="submit">Добавить</button>
+                </form>
+                <button class="close-add-modal">×</button>
+            </div>
+        </div>
     </main>
     <footer>
         
@@ -115,5 +144,6 @@
     <script src="js/header.js"></script>
     <script src="https://kit.fontawesome.com/218ceb4af6.js" crossorigin="anonymous"></script>
     <script src="js/modal.js"></script>
+    <script src="js/add-photo.js"></script>
 </body>
 </html>
