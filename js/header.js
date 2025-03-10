@@ -16,33 +16,31 @@ const searchInput = document.querySelector('.input');
 
 // Функция фильтрации карточек по символам в тегах
 function filterCardsByTags(searchTerm) {
-    const cards = document.querySelectorAll('.card');
-    const searchTags = searchTerm.toLowerCase().split(',').map(tag => tag.trim()).filter(tag => tag);
+  const cards = document.querySelectorAll('.card');
+  const searchTags = searchTerm.toLowerCase().split(',').map(tag => tag.trim()).filter(tag => tag);
 
-    cards.forEach(card => {
-        const cardTags = card.getAttribute('data-tags').toLowerCase();
-        
-        // Если поле пустое, показываем все карточки
-        if (searchTags.length === 0) {
-            card.classList.remove('hidden');
-            return;
-        }
-
-        // Проверяем, содержится ли хотя бы одна подстрока из searchTags в cardTags
-        const matches = searchTags.some(searchTag => cardTags.includes(searchTag));
-        
-        if (matches) {
-            card.classList.remove('hidden');
-        } else {
-            card.classList.add('hidden');
-        }
-    });
+  cards.forEach(card => {
+      const cardTags = card.getAttribute('data-tags').toLowerCase();
+      const matches = searchTags.length === 0 || searchTags.some(searchTag => cardTags.includes(searchTag));
+      
+      if (matches) {
+          card.classList.remove('hidden');
+          card.style.display = 'block'; // Показываем карточку
+      } else {
+          card.classList.add('hidden');
+          // Даём анимации завершиться, затем скрываем
+          setTimeout(() => {
+              if (card.classList.contains('hidden')) {
+                  card.style.display = 'none';
+              }
+          }, 300); // 300мс соответствует времени transition
+      }
+  });
 }
 
-// Обработка ввода в search-bar
 searchInput.addEventListener('input', (e) => {
-    const searchTerm = e.target.value;
-    filterCardsByTags(searchTerm);
+  const searchTerm = e.target.value;
+  filterCardsByTags(searchTerm);
 });
 
 // Убираем blur, фильтр остаётся активным, пока текст не изменён

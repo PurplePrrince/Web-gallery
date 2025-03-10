@@ -9,6 +9,7 @@ const cardsContainer = document.querySelector('.cards-container'); // Единс
 function loadCardsFromStorage() {
     const savedCards = JSON.parse(localStorage.getItem('swampCards')) || [];
     savedCards.forEach(cardData => createCard(cardData));
+    cardsContainer.classList.add('visible');
 }
 
 // Создание карточки
